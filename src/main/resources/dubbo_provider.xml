@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <dubbo:application name="service-provider" />
+    <!--<dubbo:registry address="10.7.28.179:2181"/>-->
+    <dubbo:protocol name="dubbo" port="20880"/>
+    <dubbo:protocol name="rest" port="8888"/>
+    <!--<dubbo:protocol name="rest" port="8080" />-->
+    <dubbo:registry protocol="zookeeper" address="localhost:2181"/>
+
+    <!-- dubbox暴露restful接口-->
+    <dubbo:service interface="org.ymh.restdemo.UserService" ref="UserService" protocol="rest,dubbo"/>
+    <bean id="UserService" class="org.ymh.restdemo.UserServiceImpl"/>
+</beans>
+
